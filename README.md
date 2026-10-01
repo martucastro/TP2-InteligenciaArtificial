@@ -3,38 +3,69 @@ Inteligencia Artificial · UADE · Docente: Christian Parkinson
 
 Implementación de 4 algoritmos de búsqueda para que Pacman encuentre el camino a la meta dentro de un laberinto, sobre el proyecto de Pacman AI de la Universidad de Berkeley (adaptado por Nelson Ponzoni para la cátedra).
 
-##Estado
-Las 4 funciones están implementadas en `search.py` y probadas corriendo Pacman en varios laberintos (`tinyMaze`, `mediumMaze`, `openMaze`, `mediumDottedMaze`), ganando en todos los casos.
+![Pacman resolviendo un laberinto](docs/img/pacman_game.gif)
+
+- Enunciado: [`docs/enunciado-TP2-Busqueda.pdf`](docs/enunciado-TP2-Busqueda.pdf)
+- Explicación paso a paso para la defensa: [`EXPLICACION.md`](EXPLICACION.md)
 
 ## Qué se implementó
-En `search.py`:
-- `depthFirstSearch` — búsqueda en **profundidad** (usa una pila)
-- `breadthFirstSearch` — búsqueda en **anchura** (usa una cola)
-- `uniformCostSearch` — búsqueda de **costo uniforme** (usa una cola de prioridad por costo acumulado)
-- `aStarSearch` — búsqueda **A\*** (cola de prioridad por costo acumulado + heurística)
+Todo el trabajo está en **`search.py`**. El resto de los archivos es el juego que provee la cátedra.
 
-Los 4 comparten la misma lógica: van sacando estados de una "frontera" (la lista de pendientes), y lo único que cambia entre uno y otro es el orden en que se saca el próximo. Marcan los estados ya visitados para no repetir caminos.
+| Función | Algoritmo | Frontera (de dónde saca el próximo estado) |
+|---|---|---|
+| `depthFirstSearch` | Profundidad (DFS) | Pila: sale el último que entró |
+| `breadthFirstSearch` | Anchura (BFS) | Cola: sale el primero que entró |
+| `uniformCostSearch` | Costo uniforme (UCS) | Cola de prioridad por costo acumulado |
+| `aStarSearch` | A\* | Cola de prioridad por costo acumulado + heurística |
 
-> Aclaración: el enunciado del TP llama "búsqueda informada" a los 4 algoritmos, pero en rigor solo A\* lo es (porque usa una heurística). Profundidad, anchura y costo uniforme son búsquedas no informadas.
+Los 4 hacen lo mismo: sacan un estado de la frontera, se fijan si es la meta y, si no, agregan sus vecinos. **Lo único que cambia es la frontera.**
+
+## Resultados (todos ganan)
+Costo del camino / nodos expandidos:
+
+| Laberinto | DFS | BFS | UCS | A\* (Manhattan) |
+|---|---|---|---|---|
+| `tp2Maze` | 17 / 22 | 15 / 23 | 15 / 23 | 15 / **19** |
+| `tinyMaze` | 10 / 15 | 8 / 15 | 8 / 15 | 8 / **14** |
+| `mediumMaze` | 130 / 146 | 68 / 269 | 68 / 269 | 68 / **221** |
+| `openMaze` | 298 / 576 | 54 / 682 | 54 / 682 | 54 / **535** |
 
 ## Cómo correrlo
-Requiere Python 3. Desde esta carpeta:
+Requiere Python 3. Doble clic en **`jugar.bat`**, o escribir `jugar` en `cmd` desde esta carpeta. Se abre un menú:
+```
+1) Ver el juego          (Pacman moviendose en una ventana)
+2) Comparar algoritmos   (tabla con los numeros de los 4)
+3) Salir
+```
+Atajo para abrir el juego directo: `jugar bfs mediumMaze`.
+Qué se ve en cada caso: ver [`EXPLICACION.md`](EXPLICACION.md#qué-se-ve-al-correrlo).
+
+También se puede llamar al juego directo:
 ```bash
-python pacman.py -l tinyMaze -p SearchAgent -a fn=dfs
+python pacman.py -l tp2Maze -p SearchAgent -a fn=dfs
 python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
 python pacman.py -l mediumMaze -p SearchAgent -a fn=ucs
 python pacman.py -l openMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
 ```
-Agregando `-q` al final corre en modo texto (rápido, sin ventana); sin `-q` se abre el juego para ver a Pacman moverse.
+Agregando `-q` corre en modo texto (rápido, sin ventana). Más comandos en [`commands.txt`](commands.txt).
 
 ## Estructura del proyecto
 ```
-search.py          <- acá está lo implementado (las 4 funciones)
-searchAgents.py     <- agentes que usan las funciones de búsqueda
-pacman.py           <- ejecuta el juego
-game.py, util.py    <- infraestructura del proyecto (no se modifica)
-layouts/            <- los mapas de los laberintos (.lay)
+search.py            <- LO NUESTRO: los 4 algoritmos
+EXPLICACION.md       <- guía para entender y defender el TP
+jugar.bat            <- script para correr el juego fácil
+commands.txt         <- comandos listos para probar
+
+pacman.py            <- arranca el juego
+searchAgents.py      <- el agente que llama a nuestras funciones de búsqueda
+game.py, util.py     <- reglas del juego y estructuras (Stack, Queue, PriorityQueue)
+layout.py            <- lee los mapas
+pacmanAgents.py, ghostAgents.py, keyboardAgents.py   <- agentes del juego
+graphicsDisplay.py, graphicsUtils.py, textDisplay.py <- pantalla
+layouts/             <- mapas de laberintos (.lay); tp2Maze.lay es el laberinto chico de ejemplo
+docs/                <- enunciado e imágenes
 ```
+Los archivos del juego tienen que quedar todos en la misma carpeta: `pacman.py` los importa por nombre.
 
 ## Integrantes
 - Martina Toffoletto
