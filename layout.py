@@ -1,17 +1,3 @@
-# layout.py
-# ---------
-# Licensing Information:  You are free to use or extend these projects for
-# educational purposes provided that (1) you do not distribute or publish
-# solutions, (2) you retain this notice, and (3) you provide clear
-# attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
-# Attribution Information: The Pacman AI projects were developed at UC Berkeley.
-# The core projects and autograders were primarily created by John DeNero
-# (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
-# Student side autograding was added by Brad Miller, Nick Hay, and
-# Pieter Abbeel (pabbeel@cs.berkeley.edu).
-
-
 from util import manhattanDistance
 from game import Grid
 import os
@@ -21,10 +7,6 @@ from functools import reduce
 VISIBILITY_MATRIX_CACHE = {}
 
 class Layout:
-    """
-    A Layout manages the static information about the game board.
-    """
-
     def __init__(self, layoutText):
         self.width = len(layoutText[0])
         self.height= len(layoutText)
@@ -36,7 +18,6 @@ class Layout:
         self.processLayoutText(layoutText)
         self.layoutText = layoutText
         self.totalFood = len(self.food.asList())
-        # self.initializeVisibilityMatrix()
 
     def getNumGhosts(self):
         return self.numGhosts
@@ -94,18 +75,6 @@ class Layout:
         return Layout(self.layoutText[:])
 
     def processLayoutText(self, layoutText):
-        """
-        Coordinates are flipped from the input format to the (x,y) convention here
-
-        The shape of the maze.  Each character
-        represents a different type of object.
-         % - Wall
-         . - Food
-         o - Capsule
-         G - Ghost
-         P - Pacman
-        Other characters are ignored.
-        """
         maxY = self.height - 1
         for y in range(self.height):
             for x in range(self.width):
