@@ -353,7 +353,7 @@ def readCommand( argv ):
         raise Exception('Command line input not understood: ' + str(otherjunk))
     args = dict()
 
-    if options.fixRandomSeed: random.seed('cs188')
+    if options.fixRandomSeed: random.seed('tp2')
 
     args['layout'] = layout.getLayout( options.layout )
     if args['layout'] == None: raise Exception("The layout " + options.layout + " cannot be found")

@@ -2,7 +2,7 @@
 
 Guía para entender el código de punta a punta y poder defenderlo: qué hace cada archivo, qué clases y funciones tiene, cómo se llaman entre sí y cómo funciona cada algoritmo.
 
-**Lo que implementamos nosotros está en `search.py`** (los 4 algoritmos). El resto es el juego de Pacman que da la cátedra (proyecto Pacman AI de UC Berkeley, CS188).
+**Lo que implementamos nosotros está en `search.py`** (los 4 algoritmos). El resto es el juego de Pacman que da la cátedra.
 
 ## Índice
 
@@ -603,7 +603,7 @@ Para la defensa: mostrá el juego con vista para que se **vea** la diferencia y 
 
 ## 12. Lo que sacamos del código base
 
-El proyecto original de Berkeley trae más cosas que esta consigna no pide. Las borramos para que quede solo lo que se usa:
+El juego que da la cátedra trae más cosas que esta consigna no pide. Las borramos para que quede solo lo que se usa:
 
 | Qué | Para qué era |
 |---|---|
@@ -612,7 +612,7 @@ El proyecto original de Berkeley trae más cosas que esta consigna no pide. Las 
 | `pacmanAgents.py` y `keyboardAgents.py` | Pacmans que no buscan y el control por teclado |
 | `DirectionalGhost` (`ghostAgents.py`) | Fantasmas que persiguen a Pacman |
 | Grabar y reproducir partidas (`-r`, `--replay`), modo texto (`-t`), entrenamiento (`-x`) en `pacman.py` | Funciones del motor para otros TPs |
-| El autograder (`grading.py`, `testClasses.py`, ...) y `eightpuzzle.py` | Corrección automática de Berkeley y otro problema de ejemplo |
+| El autograder (`grading.py`, `testClasses.py`, ...) y `eightpuzzle.py` | Corrección automática y otro problema de ejemplo |
 | Los otros laberintos (quedaron solo `tp2Maze` y `mediumMaze`) | Con esos dos alcanza: uno chico para explicar paso a paso y uno mediano para comparar con números |
 
 Ahora, si se corre `python pacman.py` sin parámetros, arranca `SearchAgent` (con DFS, el valor por defecto) en `tp2Maze`.

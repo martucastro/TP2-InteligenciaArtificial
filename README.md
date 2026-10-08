@@ -1,7 +1,7 @@
 # TP 2 – Búsqueda (Pacman)
 Inteligencia Artificial · UADE · Docente: Christian Parkinson
 
-Implementación de 4 algoritmos de búsqueda para que Pacman encuentre el camino a la meta dentro de un laberinto. Se trabajó sobre el proyecto Pacman AI de UC Berkeley (CS188), adaptado por Nelson Ponzoni para la cátedra.
+Implementación de 4 algoritmos de búsqueda para que Pacman encuentre el camino a la meta dentro de un laberinto. Se trabajó sobre el juego de Pacman que provee la cátedra (adaptado por Nelson Ponzoni).
 
 ![Pacman resolviendo un laberinto](docs/img/pacman_game.gif)
 
